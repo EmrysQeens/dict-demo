@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Web Dictionary</title>
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0"/>
+		<script>
+			document.addEventListener('DOMContentLoaded', function(){
+				document.querySelector('#btn').onclick=function(){
+					request= new XMLHttpRequest()
+					request.open('POST', '/', true)
+					data = new FormData()
+					data.append("word", document.querySelector('#t').value)
+					request.send(data)
+					request.onload=function(){
+						if(request.status === 200){
+								resp = request.responseText
+								if (resp === "null-word")
+									document.querySelector("#o").innerText ="Invalid Word"
+								else document.querySelector("#o").innerText = resp
+								} 
+						else document.querySelector("#o").innerText = "ERROR"
+					}
+					request.onerror=function(){
+						alert("error")
+					}
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="text" name="word" placeholder="Word" id="t"/>
+			<button id="btn">Search</button>
+		</div>
+		<div id="o">
+		</div>
+	</body>
+</html>
