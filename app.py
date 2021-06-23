@@ -3,7 +3,7 @@ from json import loads
 
 app = Flask(__name__)
 
-words = None
+words = loads(open('dictionary.json', 'r').read())
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -18,5 +18,4 @@ def index():
 
 
 if __name__ == '__main__':
-	words = loads(open('dictionary.json', 'r').read())
-	Flask.run(app, port=5000, debug=True)
+	Flask.run(app, port=5000, debug=False)
